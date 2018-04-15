@@ -8,13 +8,14 @@
 >
     <testsuites>
         <testsuite name="Test Suite">
-            <directory>./src/Simplex/Tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./tests</directory>
         </whitelist>
     </filter>
 </phpunit>

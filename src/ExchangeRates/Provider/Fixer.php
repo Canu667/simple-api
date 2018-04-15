@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace ExchangeRates\Provider;
 
 use ExchangeRates\Exception\ServiceUnavailableException;

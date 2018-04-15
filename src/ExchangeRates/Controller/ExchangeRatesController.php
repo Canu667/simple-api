@@ -9,6 +9,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ExchangeRatesController extends Controller
 {
+    /**
+     * @param string $amount
+     * @param string $baseCurrency
+     * @param string $targetCurrency
+     * @return JsonResponse
+     */
     public function indexAction(string $amount, string $baseCurrency, string $targetCurrency): JsonResponse
     {
         $exchangeEnquiry = new ExchangeEnquiry((float) $amount, $baseCurrency, $targetCurrency);

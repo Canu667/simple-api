@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Pipe;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

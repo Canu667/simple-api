@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace ExchangeRates;
 
 class Calculator implements CalculatorInterface
