@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ExchangeRates\Exception;
+namespace ExchangeRates\Exception;
 
 use RuntimeException;
 use Throwable;

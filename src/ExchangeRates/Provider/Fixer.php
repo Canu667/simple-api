@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\ExchangeRates\Provider;
+namespace ExchangeRates\Provider;
 
-use App\ExchangeRates\Exception\ServiceUnavailableException;
+use ExchangeRates\Exception\ServiceUnavailableException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -48,7 +48,7 @@ class Fixer implements ProviderInterface
         $targetCurrency = strtoupper($targetCurrency);
 
         if ($baseCurrency === $targetCurrency) {
-            return 1.0;
+            throw new \LogicException('What do you want from me?');
         }
 
         try {
@@ -62,44 +62,18 @@ class Fixer implements ProviderInterface
                 ]
             );
 
-            $responseAsStdObject = \GuzzleHttp\json_decode($response->getBody());
+            $responseArray = \GuzzleHttp\json_decode($response->getBody(), true);
+
         } catch (GuzzleException $e) {
             throw new ServiceUnavailableException('', 504, $e);
         }
 
-        if (!property_exists($responseAsStdObject->rates, $targetCurrency)) {
+        if (!isset($responseArray['rates'], $targetCurrency)) {
             throw new ServiceUnavailableException(
                 'We\'re currently experiencing some problems, please try again shortly or contact us.'
             );
         }
 
-        return (float) $responseAsStdObject->rates->{$targetCurrency};
-    }
-
-    /**
-     * @return array
-     *
-     * @throws ServiceUnavailableException
-     */
-    public function getSupportedCurrencies(): array
-    {
-        try {
-            $response = $this->client->request(
-                static::REQUEST_METHOD,
-                $this->baseUri
-            );
-
-            $responseAsArray = \GuzzleHttp\json_decode($response->getBody(), true);
-        } catch (GuzzleException $e) {
-            throw new ServiceUnavailableException('', 504, $e);
-        }
-
-        if (empty($responseAsArray['rates'])) {
-            throw new ServiceUnavailableException(
-                'We\'re currently experiencing some problems, please try again shortly or contact us.'
-            );
-        }
-
-        return array_keys($responseAsArray['rates']);
+        return (float) $responseArray['rates'][$targetCurrency];
     }
 }

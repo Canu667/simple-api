@@ -4,30 +4,19 @@ declare(strict_types = 1);
 
 namespace Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 class ExchangeEnquiry
 {
     /**
-     * @Assert\NotBlank
-     * @Assert\GreaterThan(0)
-     *
      * @var float Amount to exchange
      */
     protected $amount;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Currency
-     *
      * @var string ISO 4217 Currency Code of base currency
      */
     protected $baseCurrency;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Currency
-     *
      * @var string ISO 4217 Currency Code of target currency
      */
     protected $targetCurrency;

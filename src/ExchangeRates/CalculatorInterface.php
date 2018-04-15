@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\ExchangeRates;
+namespace ExchangeRates;
 
 interface CalculatorInterface
 {

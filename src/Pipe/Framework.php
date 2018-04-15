@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 namespace Pipe;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -27,7 +30,7 @@ class Framework implements HttpKernelInterface
         Request $request,
         $type = HttpKernelInterface::MASTER_REQUEST,
         $catch = true
-    ){
+    ) {
         $this->matcher->getContext()->fromRequest($request);
 
         try {
@@ -40,6 +43,7 @@ class Framework implements HttpKernelInterface
         } catch (ResourceNotFoundException $exception) {
             $response = new Response('Not Found', 404);
         } catch (\Exception $exception) {
+            echo $exception->getMessage();
             $response = new Response('An error occurred', 500);
         }
 
