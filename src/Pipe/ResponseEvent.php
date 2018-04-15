@@ -1,6 +1,5 @@
 <?php
-// example.com/src/Simplex/ResponseEvent.php
-namespace Simplex;
+namespace Pipe;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

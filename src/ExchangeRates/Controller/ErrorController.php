@@ -1,5 +1,4 @@
 <?php
-// example.com/src/Calendar/Controller/ErrorController.php
 namespace Calendar\Controller;
 
 use Symfony\Component\HttpFoundation\Response;

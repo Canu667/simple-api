@@ -1,6 +1,5 @@
 <?php
-// example.com/src/Simplex/Framework.php
-namespace Simplex;
+namespace Pipe;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,14 +12,12 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
 
 class Framework implements HttpKernelInterface
 {
-    private $dispatcher;
     private $matcher;
     private $controllerResolver;
     private $argumentResolver;
 
-    public function __construct(EventDispatcher $dispatcher, UrlMatcherInterface $matcher, ControllerResolverInterface $controllerResolver, ArgumentResolverInterface $argumentResolver)
+    public function __construct(UrlMatcherInterface $matcher, ControllerResolverInterface $controllerResolver, ArgumentResolverInterface $argumentResolver)
     {
-        $this->dispatcher = $dispatcher;
         $this->matcher = $matcher;
         $this->controllerResolver = $controllerResolver;
         $this->argumentResolver = $argumentResolver;
@@ -45,9 +42,6 @@ class Framework implements HttpKernelInterface
         } catch (\Exception $exception) {
             $response = new Response('An error occurred', 500);
         }
-
-        // dispatch a response event
-        $this->dispatcher->dispatch('response', new ResponseEvent($response, $request));
 
         return $response;
     }

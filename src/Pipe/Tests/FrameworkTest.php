@@ -1,9 +1,8 @@
 <?php
-// example.com/tests/Simplex/Tests/FrameworkTest.php
-namespace Simplex\Tests;
+namespace Pipe\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Simplex\Framework;
+use Pipe\Framework;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
@@ -24,8 +23,6 @@ class FrameworkTest extends TestCase
     private function getFrameworkForException($exception)
     {
         $matcher = $this->createMock(Routing\Matcher\UrlMatcherInterface::class);
-        // use getMock() on PHPUnit 5.3 or below
-        // $matcher = $this->getMock(Routing\Matcher\UrlMatcherInterface::class);
 
         $matcher
             ->expects($this->once())
@@ -51,6 +48,4 @@ class FrameworkTest extends TestCase
 
         $this->assertEquals(500, $response->getStatusCode());
     }
-
-
 }
